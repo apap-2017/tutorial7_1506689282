@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head th:replace="fragments/fragment :: head('View All Courses')"></head>
+    <body>
+      	<script type="text/javascript">
+	  	$(document).ready( function () {
+	  		    $('#course').DataTable();
+	  	});    
+		</script>
+        <h1>All Courses</h1>
+        <table id="course">
+		    <thead>
+		        <tr>
+		            <th>No</th>
+		            <th>Course ID</th>
+		            <th>Course Name</th>
+		            <th>Credits</th>
+		            <th>Students</th>
+		        </tr>
+		    </thead>
+		    <tbody>
+			    <tr th:each="course,iterationStatus: ${courses}">
+		            <td th:text="${iterationStatus.count}">No</td>
+			       	<td th:text="${course.idCourse}">Course ID</td>
+			       	<td th:text=" ${course.name}">Course Name</td>
+			       	<td th:text="${course.credits}">Course Credits</td>
+			       	<td>
+						<ul>
+						  <li th:each="student : ${course.students}" th:text="${student.name} + ' (' + ${student.npm} + ')'">Student</li>
+						</ul>
+					</td>
+	       		</tr>
+	       	</tbody>
+		</table>
+    </body>
+</html>
